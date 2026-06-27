@@ -19,7 +19,8 @@ namespace ISA.Emulator
 
         static int IP => Registers[reg["IP"]];
 
-        const string machineFileName = "C:\\Users\\Aidan.Gildea\\source\\repos\\ISA\\Assembler\\bin\\Debug\\net8.0\\TestData\\TestInfiniteCounter.bin";
+        // Default is relative to the executable's directory (TestData is copied next to the build output).
+        static readonly string DefaultMachineFileName = Path.Combine(AppContext.BaseDirectory, "TestData", "TestInfiniteCounter.bin");
 
         //Dictionary<> Is there a way to make a function dictionary??
         //make gotos
@@ -31,6 +32,8 @@ namespace ISA.Emulator
 
         static void Main(string[] args)
         {
+            // Usage: Emulator [inputBinFile]
+            string machineFileName = args.Length > 0 ? args[0] : DefaultMachineFileName;
             int[] instructions = ConvertBinToInstructions(machineFileName);
 
             Registers[reg["IP"]] = 0;

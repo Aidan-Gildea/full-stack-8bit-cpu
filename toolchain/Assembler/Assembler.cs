@@ -12,19 +12,22 @@ namespace ISA.Assembler
         const string LABEL = ":";
         const byte INSTRUCTION_LENGTH = 4; // 4 bytes / instruction
 
-        const string AssemblyCodeFile = "C:\\Users\\Aidan.Gildea\\source\\repos\\ISA\\Assembler\\bin\\Debug\\net8.0\\TestData\\InfiniteCouter.asm";
-        const string BinaryOutputFile = "TestData\\TestInfiniteCounter.bin";
+        // Defaults are relative to the executable's directory (TestData is copied next to the build output).
+        static readonly string DefaultAssemblyCodeFile = Path.Combine(AppContext.BaseDirectory, "TestData", "InfiniteCouter.asm");
+        static readonly string DefaultBinaryOutputFile = Path.Combine(AppContext.BaseDirectory, "TestData", "TestInfiniteCounter.bin");
 
         static void Main(string[] args)
         {
-            //string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            //string projectPath = Path.Combine(docPath, "source", ) for dynamic file paths
+            // Usage: Assembler [inputAsmFile] [outputBinFile]
+            string assemblyCodeFile = args.Length > 0 ? args[0] : DefaultAssemblyCodeFile;
+            string binaryOutputFile = args.Length > 1 ? args[1] : DefaultBinaryOutputFile;
 
+            byte[] machineCode = Assemble(assemblyCodeFile);
 
-            byte[] machineCode = Assemble(AssemblyCodeFile);
-            File.WriteAllBytes(BinaryOutputFile, machineCode);
+            Directory.CreateDirectory(Path.GetDirectoryName(binaryOutputFile));
+            File.WriteAllBytes(binaryOutputFile, machineCode);
 
-
+            Console.WriteLine($"Assembled '{assemblyCodeFile}' -> '{binaryOutputFile}' ({machineCode.Length} bytes).");
         }
 
         static string[] ParseStringsFromFile(string path) 

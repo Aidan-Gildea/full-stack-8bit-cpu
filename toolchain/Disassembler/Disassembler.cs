@@ -7,12 +7,22 @@ namespace ISA.Disassembler
     internal class Disassembler
     {
 
-        const string binaryFileName = "C:\\Users\\Aidan.Gildea\\source\\repos\\ISA\\Assembler\\bin\\Debug\\net8.0\\TestData\\TestInfiniteCounter.bin";
-        const string disassemblyFileName = "C:\\Users\\Aidan.Gildea\\source\\repos\\ISA\\Assembler\\bin\\Debug\\net8.0\\TestData\\InfiniteCounter.dasm";
+        // Defaults are relative to the executable's directory (TestData is copied next to the build output).
+        static readonly string DefaultBinaryFileName = Path.Combine(AppContext.BaseDirectory, "TestData", "TestInfiniteCounter.bin");
+        static readonly string DefaultDisassemblyFileName = Path.Combine(AppContext.BaseDirectory, "TestData", "InfiniteCounter.dasm");
+
         static void Main(string[] args)
         {
+            // Usage: Disassembler [inputBinFile] [outputDasmFile]
+            string binaryFileName = args.Length > 0 ? args[0] : DefaultBinaryFileName;
+            string disassemblyFileName = args.Length > 1 ? args[1] : DefaultDisassemblyFileName;
+
             string disassembly = Disassemble(args, binaryFileName);
+
+            Directory.CreateDirectory(Path.GetDirectoryName(disassemblyFileName));
             File.WriteAllText(disassemblyFileName, disassembly);
+
+            Console.WriteLine($"Disassembled '{binaryFileName}' -> '{disassemblyFileName}'.");
         }
 
         static string Disassemble(string[] args, string FileName)
