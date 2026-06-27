@@ -14,7 +14,7 @@ namespace ISALib
             ["ONE"] = 0x01,
             ["CHAR"] = 0x02,
             ["FLAGS"] = 0x03,
-            ["RANDOM"] = 0x04,
+            ["RNDM"] = 0x04,
             ["USER"] = 0x05,
             ["IP"] = 0x06,
             ["FREE_17"] = 0x07,
@@ -42,6 +42,14 @@ namespace ISALib
             ["FREE_1D"] = 0x1D,
             ["FREE_1E"] = 0x1E,
             ["FREE_1F"] = 0x1F
+        };
+
+        public static Dictionary<string, int> FlagIndex = new()
+        {
+            //RNDM, READ, PRNT
+            ["PRNT"] = 0,
+            ["READ"] = 1,
+            ["RNDM"] = 2
         };
     }
 }

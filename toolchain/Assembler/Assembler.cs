@@ -8,8 +8,10 @@ namespace ISA.Assembler
 {
     internal class Assembler
     {
+        //done!
         const string COMMENT = "#"; // comment string. 
         const string LABEL = ":";
+        const string COMMENT2 = ";";
         const byte INSTRUCTION_LENGTH = 4; // 4 bytes / instruction
 
         // Defaults are relative to the executable's directory (TestData is copied next to the build output).
@@ -37,31 +39,65 @@ namespace ISA.Assembler
 
         static byte[] Assemble(string File) 
         {
-            Dictionary<string, byte> labels;
             //first pass
             string[] file = ParseStringsFromFile(File);
-            foreach(var l in file) 
+
+            Dictionary<string, byte> labels = new();
+
+            int passednonlabels = 0; 
+            for(int l = 0; l < file.Length; l++) 
             {
-                string[] parts = l.ToUpper().Split(' ', StringSplitOptions.RemoveEmptyEntries);
-                foreach (var word in parts) 
+                string line = file[l];
+                int commentIndex = line.IndexOf(COMMENT);
+                if (commentIndex >= 0) line = line.Substring(0, commentIndex);
+                commentIndex = line.IndexOf(COMMENT2);
+                if (commentIndex >= 0) line = line.Substring(0, commentIndex);
+
+                string[] parts = line.ToUpper().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                if (parts.Length == 0) 
                 {
-                    if(word == LABEL) 
-                    {
-                        //add label to dictoinary
-                    }
+                    continue;
+                }//splits each line into separate parts. 
+                //if (parts[0] == COMMENT2) continue; // Handled above
+                if (parts[0] == LABEL) 
+                {
+                    labels.Add(parts[1], (byte)(passednonlabels)); //note that the indexes start at 1. If i want to point 2 lines in the future, have to do +2
+                }
+                else 
+                {
+                    passednonlabels++;
                 }
             }
+            //iterate through and get all labels. 
 
             int currentByte = 0;
             byte[] machineCode = new byte[file.Length * INSTRUCTION_LENGTH];
 
 
 
-            foreach (var line in file)
+            foreach (var rawLine in file)
             {
-                string[] parts = line.ToUpper().Split(' ', StringSplitOptions.RemoveEmptyEntries); //splits each line into separate parts. 
+                string line = rawLine;
+                int commentIndex = line.IndexOf(COMMENT);
+                if (commentIndex >= 0) line = line.Substring(0, commentIndex);
+                commentIndex = line.IndexOf(COMMENT2);
+                if (commentIndex >= 0) line = line.Substring(0, commentIndex);
 
-                byte[] bytes = Codes[parts[0]].Assemble(parts);
+                if(line == "") 
+                {
+                    continue;
+                }
+                string[] parts = line.ToUpper().Split(' ', StringSplitOptions.RemoveEmptyEntries); //splits each line into separate parts. 
+                if (parts.Length == 0) continue;
+
+                //if (parts[0] == COMMENT2) continue;
+
+                if (parts[0] == LABEL) 
+                {
+                    continue;
+                }
+
+                byte[] bytes = Codes[parts[0]].Assemble(parts, labels);
                 foreach (byte val in bytes)
                 {
                     machineCode[currentByte] = val;
