@@ -1,32 +1,38 @@
-# AG-Core Assembler, Emulator, and Disassembler
-A custom 32-bit Instruction Set Architecture (ISA) with a complete software stack, including a two-pass assembler, emulator, and disassembler.
+# SimpleISA
 
-## Overview
-The **AG-Core** is a custom ISA designed to explore low-level systems and the hardware-software interface. This repository contains the full toolchain required to write, compile, and execute programs on a virtual CPU.
+A custom instruction set with an assembler, disassembler, emulator, and a Logisim CPU that runs it.
 
-### Technical Specifications
-* **Instruction Length:** 32-bit (fixed-length, 4 bytes).
-* **Instruction Format:** `[OPCODE (8-bit) | PARAM1 (8-bit) | PARAM2 (8-bit) | PARAM3 (8-bit)]`.
-* **Registers:** 32 registers, including special-purpose registers for Instruction Pointer (`IP`), Flags, and Random Number Generation.
-* **Execution Model:** Simulated fetch-decode-execute cycle within the Emulator.
+## What's here
 
-### 🛠️ The Software Stack
-* **ISALib:** The core library defining opcodes, register mappings, and the binary specification used by all the other tools.
-* **Two-Pass Assembler:** Supports labels and symbols. It first maps label addresses and then generates machine code.
-* **Emulator:** A virtual environment that simulates CPU with registers and basic I/O (Read/Print).
-* **Disassembler:** A program to reverse the binary machine code produced by the two-pass assembler back into human-readable assembly. The central purpose of the disassembler is for debugging. 
+- **ISALib** (`toolchain/ISALib`): a .NET class library containing all the definitions from the ISA spec implemented in code, shared by the assembler, disassembler, emulator, and other tools.
+- **Assembler** (`toolchain/Assembler`): two-pass assembler with label support, turns assembly files (`.asm`) files into machine code.
+- **Disassembler** (`toolchain/Disassembler`): turns machine code back into readable assembly for debugging.
+- **Emulator** (`toolchain/Emulator`): runs the machine code in software. Written in C#, with registers and basic I/O.
+- **Logisim CPU** (`logisim/logisim/SimpleCPU.circ`): a gate-level CPU that executes the assembled bytecode in hardware.
+- **Spec** (`spec/`): the full instruction and register definitions as CSV.
 
-## Project Highlight: Rock-Paper-Scissors
-To validate the architecture, I developed a functional "Rock Paper Scissors" game written entirely in AG-Core assembly. The program handles user input via the `READ` opcode, implements game logic using conditional jumps (`JMPZ`), and outputs results using the `PRNT` opcode.
+## The ISA
 
-## ISA Specification
-The full bit-layout, opcodes, and register definitions are documented in this [ISA Specification Sheet](https://docs.google.com/spreadsheets/d/1EImqmfBQeWMdciui3smtlShUqmLWG_6YjswOCMwuLK0/edit?usp=sharing).
+- 32-bit fixed-length instructions: `[OPCODE | PARAM1 | PARAM2 | PARAM3]`, one byte each.
+- 32 registers, including special-purpose ones for the instruction pointer, flags, char I/O, and random number generation.
+- ~30 instructions covering math, logic, memory, control flow, and I/O. Full list in `spec/isa-instructions.csv`.
 
-## Getting Started
-### Prerequisites
-* .NET 8.0 SDK
+## Demo: Rock Paper Scissors
 
-### Building the Project
+A full Rock Paper Scissors game written in SimpleISA assembly (`toolchain/Assembler/TestData/RockPaperScissors.asm`). It reads user input with `READ`, branches with `JMPZ`, and prints results with `PRNT`.
+
+## Media
+
+The full CPU built in Logisim:
+
+![SimpleISA CPU in Logisim](media/cpu-layout.png)
+
+## Getting started
+
+Requires the .NET 8.0 SDK.
+
 ```bash
-dotnet build ISA.sln
+dotnet build toolchain/ISA.sln
 ```
+
+The Logisim CPU opens in [Logisim Evolution](https://github.com/logisim-evolution/logisim-evolution).

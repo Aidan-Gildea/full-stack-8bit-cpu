@@ -139,29 +139,11 @@
     </comp>
     <comp lib="6" loc="(1000,690)" name="Hex Digit Display"/>
     <comp lib="6" loc="(1050,690)" name="Hex Digit Display"/>
-    <comp lib="9" loc="(1010,65)" name="Text">
-      <a name="text" val="opcode -    in1    -    in2     -      in3  "/>
-    </comp>
-    <comp lib="9" loc="(1015,130)" name="Text">
-      <a name="text" val="Note: fetch is already &quot;stored&quot; in ROM"/>
-    </comp>
     <comp lib="9" loc="(120,265)" name="Text">
       <a name="text" val="starts high"/>
     </comp>
     <comp lib="9" loc="(1250,650)" name="Text">
       <a name="text" val="regAddrB = val"/>
-    </comp>
-    <comp lib="9" loc="(1825,445)" name="Text">
-      <a name="text" val="Doesnt this create race condition w clock"/>
-    </comp>
-    <comp lib="9" loc="(1850,475)" name="Text">
-      <a name="text" val="Yes, it does; invert clock to update on falling edge"/>
-    </comp>
-    <comp lib="9" loc="(710,845)" name="Text">
-      <a name="text" val="note: read doesn't necessarily have to have a certain condition in order to get certain values"/>
-    </comp>
-    <comp lib="9" loc="(935,90)" name="Text">
-      <a name="text" val="Note to self: I designed this by dividing each state (fetch, decode, execute, etc) but they actually have a lot of overlap and so fetch has been essentially cmpressed here "/>
     </comp>
     <comp loc="(1160,200)" name="ControlUnit"/>
     <comp loc="(1540,200)" name="ALU"/>
@@ -351,19 +333,6 @@
     <wire from="(630,160)" to="(630,190)"/>
     <wire from="(630,190)" to="(680,190)"/>
   </circuit>
-  <circuit name="bitshifter">
-    <a name="appearance" val="logisim_evolution"/>
-    <a name="circuit" val="bitshifter"/>
-    <a name="circuitnamedboxfixedsize" val="true"/>
-    <a name="simulationFrequency" val="1.0"/>
-    <comp lib="1" loc="(300,170)" name="AND Gate"/>
-  </circuit>
-  <circuit name="mux">
-    <a name="appearance" val="logisim_evolution"/>
-    <a name="circuit" val="mux"/>
-    <a name="circuitnamedboxfixedsize" val="true"/>
-    <a name="simulationFrequency" val="1.0"/>
-  </circuit>
   <circuit name="ALU">
     <a name="appearance" val="logisim_evolution"/>
     <a name="circuit" val="ALU"/>
@@ -529,174 +498,6 @@
     <wire from="(630,420)" to="(630,540)"/>
     <wire from="(690,300)" to="(690,710)"/>
     <wire from="(710,220)" to="(730,220)"/>
-  </circuit>
-  <circuit name="binarydivision">
-    <a name="appearance" val="logisim_evolution"/>
-    <a name="circuit" val="binarydivision"/>
-    <a name="circuitnamedboxfixedsize" val="true"/>
-    <a name="simulationFrequency" val="1.0"/>
-    <comp lib="0" loc="(100,60)" name="Pin">
-      <a name="appearance" val="NewPins"/>
-      <a name="label" val="a"/>
-    </comp>
-    <comp lib="0" loc="(100,90)" name="Pin">
-      <a name="appearance" val="NewPins"/>
-      <a name="label" val="b"/>
-    </comp>
-    <comp lib="0" loc="(310,60)" name="Pin">
-      <a name="appearance" val="NewPins"/>
-      <a name="facing" val="west"/>
-      <a name="label" val="myout"/>
-      <a name="type" val="output"/>
-    </comp>
-    <wire from="(100,60)" to="(110,60)"/>
-    <wire from="(110,140)" to="(170,140)"/>
-    <wire from="(110,60)" to="(110,140)"/>
-    <wire from="(170,140)" to="(290,140)"/>
-    <wire from="(170,60)" to="(170,140)"/>
-    <wire from="(170,60)" to="(290,60)"/>
-    <wire from="(270,450)" to="(280,450)"/>
-    <wire from="(280,330)" to="(280,450)"/>
-    <wire from="(280,450)" to="(300,450)"/>
-    <wire from="(290,380)" to="(290,390)"/>
-    <wire from="(290,380)" to="(310,380)"/>
-    <wire from="(290,390)" to="(310,390)"/>
-    <wire from="(290,60)" to="(290,140)"/>
-    <wire from="(290,60)" to="(310,60)"/>
-    <wire from="(300,450)" to="(300,470)"/>
-    <wire from="(300,470)" to="(320,470)"/>
-    <wire from="(310,380)" to="(310,390)"/>
-    <wire from="(320,470)" to="(320,480)"/>
-    <wire from="(320,480)" to="(370,480)"/>
-    <wire from="(370,470)" to="(370,480)"/>
-    <wire from="(370,470)" to="(390,470)"/>
-    <wire from="(370,480)" to="(370,490)"/>
-    <wire from="(390,450)" to="(390,470)"/>
-    <wire from="(390,450)" to="(410,450)"/>
-    <wire from="(410,330)" to="(410,450)"/>
-    <wire from="(580,190)" to="(580,590)"/>
-    <wire from="(80,190)" to="(580,190)"/>
-    <wire from="(80,190)" to="(80,590)"/>
-    <wire from="(80,590)" to="(580,590)"/>
-  </circuit>
-  <circuit name="opcodeinterpreter">
-    <a name="appearance" val="logisim_evolution"/>
-    <a name="circuit" val="opcodeinterpreter"/>
-    <a name="circuitnamedboxfixedsize" val="true"/>
-    <a name="simulationFrequency" val="1.0"/>
-    <comp lib="0" loc="(1110,140)" name="Tunnel">
-      <a name="facing" val="east"/>
-      <a name="label" val="reg1value"/>
-      <a name="width" val="8"/>
-    </comp>
-    <comp lib="0" loc="(1110,180)" name="Tunnel">
-      <a name="facing" val="east"/>
-      <a name="label" val="reg2value"/>
-      <a name="width" val="8"/>
-    </comp>
-    <comp lib="0" loc="(1380,210)" name="Splitter">
-      <a name="bit1" val="0"/>
-      <a name="bit2" val="0"/>
-      <a name="bit3" val="0"/>
-      <a name="bit4" val="1"/>
-      <a name="bit5" val="1"/>
-      <a name="bit6" val="1"/>
-      <a name="bit7" val="1"/>
-      <a name="incoming" val="8"/>
-    </comp>
-    <comp lib="0" loc="(320,150)" name="Pin">
-      <a name="appearance" val="NewPins"/>
-      <a name="label" val="OpCode"/>
-      <a name="radix" val="16"/>
-      <a name="width" val="8"/>
-    </comp>
-    <comp lib="0" loc="(330,350)" name="Pin">
-      <a name="appearance" val="NewPins"/>
-      <a name="label" val="inrg1"/>
-      <a name="width" val="8"/>
-    </comp>
-    <comp lib="0" loc="(330,390)" name="Pin">
-      <a name="appearance" val="NewPins"/>
-      <a name="label" val="inrg2"/>
-      <a name="width" val="8"/>
-    </comp>
-    <comp lib="0" loc="(330,430)" name="Pin">
-      <a name="appearance" val="NewPins"/>
-      <a name="label" val="outrg"/>
-      <a name="width" val="8"/>
-    </comp>
-    <comp lib="0" loc="(330,470)" name="Pin">
-      <a name="appearance" val="NewPins"/>
-      <a name="label" val="inrg1val"/>
-      <a name="width" val="8"/>
-    </comp>
-    <comp lib="0" loc="(330,510)" name="Pin">
-      <a name="appearance" val="NewPins"/>
-      <a name="label" val="inrg2val"/>
-      <a name="width" val="8"/>
-    </comp>
-    <comp lib="0" loc="(350,150)" name="Splitter">
-      <a name="appear" val="right"/>
-      <a name="bit1" val="0"/>
-      <a name="bit2" val="0"/>
-      <a name="bit3" val="0"/>
-      <a name="bit4" val="1"/>
-      <a name="bit5" val="1"/>
-      <a name="bit6" val="1"/>
-      <a name="bit7" val="1"/>
-      <a name="incoming" val="8"/>
-    </comp>
-    <comp lib="0" loc="(980,490)" name="Tunnel">
-      <a name="label" val="reg1value"/>
-      <a name="width" val="8"/>
-    </comp>
-    <comp lib="0" loc="(980,530)" name="Tunnel">
-      <a name="label" val="reg2value"/>
-      <a name="width" val="8"/>
-    </comp>
-    <comp lib="2" loc="(790,200)" name="Demultiplexer">
-      <a name="select" val="4"/>
-      <a name="width" val="8"/>
-    </comp>
-    <comp lib="2" loc="(990,200)" name="Multiplexer">
-      <a name="select" val="4"/>
-      <a name="width" val="8"/>
-    </comp>
-    <comp lib="5" loc="(430,140)" name="ROM">
-      <a name="appearance" val="classic"/>
-      <a name="contents">addr/data: 8 8
-17*0 1 4 13*0 7 8
-</a>
-      <a name="label" val="OpToIndexMapping"/>
-    </comp>
-    <comp lib="9" loc="(275,65)" name="Text">
-      <a name="text" val="opcode -    in1    -    in2     -      in3  "/>
-    </comp>
-    <comp lib="9" loc="(545,120)" name="Text">
-      <a name="text" val="mapping table (shorthand for doing binary ops)"/>
-    </comp>
-    <comp loc="(1340,160)" name="ALU"/>
-    <wire from="(1110,140)" to="(1120,140)"/>
-    <wire from="(1110,180)" to="(1120,180)"/>
-    <wire from="(1120,140)" to="(1120,160)"/>
-    <wire from="(1340,160)" to="(1340,210)"/>
-    <wire from="(1340,210)" to="(1380,210)"/>
-    <wire from="(320,150)" to="(350,150)"/>
-    <wire from="(350,150)" to="(430,150)"/>
-    <wire from="(370,170)" to="(410,170)"/>
-    <wire from="(410,170)" to="(410,300)"/>
-    <wire from="(410,300)" to="(810,300)"/>
-    <wire from="(670,200)" to="(790,200)"/>
-    <wire from="(810,280)" to="(810,300)"/>
-    <wire from="(810,300)" to="(970,300)"/>
-    <wire from="(830,120)" to="(950,120)"/>
-    <wire from="(830,130)" to="(950,130)"/>
-    <wire from="(830,140)" to="(870,140)"/>
-    <wire from="(870,140)" to="(870,340)"/>
-    <wire from="(930,490)" to="(980,490)"/>
-    <wire from="(930,530)" to="(980,530)"/>
-    <wire from="(970,280)" to="(970,300)"/>
-    <wire from="(990,200)" to="(1120,200)"/>
   </circuit>
   <circuit name="InstructionCounter">
     <a name="appearance" val="logisim_evolution"/>
