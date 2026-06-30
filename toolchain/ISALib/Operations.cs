@@ -156,11 +156,6 @@ namespace ISALib
             registers[outR] = (ushort)(registers[R1] << registers[R2]);
         }
 
-        public static void RSHF(ushort[] registers, byte outR, byte R1, byte R2, int EXTRA)
-        {
-            registers[outR] = (ushort)(registers[R1] >> registers[R2]);
-        }
-
         public static void NONE(ushort[] registers, byte pad1, byte pad2, byte pad3, int EXTRA)
         {
             return;

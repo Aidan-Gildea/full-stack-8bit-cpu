@@ -16,10 +16,13 @@ Memory,READ,0x43,READ valR pad pad,"If a key is pressed, it sets the value withi
 Memory,RNDM,0x44,RNDM MinV MaxV,"If the rndm flag is 1, set to 0, set rndm register to val inbetween minv and maxv",No
 Memory,PUSH,0x45,PUSH R1 pad pad,"Pushes the value contained within R1 onto the stack: writes R1 to the memory address held in the Stack Pointer, then moves the Stack Pointer down by 1.",No
 Memory,POP,0x46,POP R1 pad pad,"Pops the top value off the stack into R1: moves the Stack Pointer up by 1, then reads the value at the Stack Pointer address into R1.",No
-Memory,LOAD,0x47,LOAD Mem1 Mem2 outR,"Gets the value stored at the memory address, where Mem1 is the 8 most significant bits and Mem2 is the 8 least significant bits, and stores that value into the outR.",No
-Memory,STR,0x48,STR Mem1 Mem2 inR,"Stores the value contained within the inR at the memory address, where Mem1 is the 8 most significant bits and Mem2 is the 8 least significant bits.",No
+Memory,LOAD,0x47,LOAD RamAddr R0,Loads into R0 the value stored in RAM at address RamAddr.,No
+Memory,STORE,0x48,STORE RamAddr R0,Stores the value in R0 into RAM at address RamAddr.,No
 Memory,INC,0x49,INC R1,"Increment the value contained within the given register, R1 by 1.",No
 Memory,DEC,0x4A,DEC R1,"Decrement the value contained within the given register, R1, by 1.",No
+Memory,LOADi,0x4B,LOADi R1 R0,Loads into R0 the value stored in RAM at the address held in R1 (indirect load).,No
+Memory,STOREi,0x4C,STOREi R1 R0,Stores the value in R0 into RAM at the address held in R1 (indirect store).,No
+Memory,SETi,0x4D,SETi R1 R0,Sets R1 to the value contained in R0 (register-to-register copy).,No
 Logic,NOT,0x20,NOT outR R1 pad,Nots the value within R1 and outputs the value in outR,No
 Logic,AND,0x21,AND outR R1 R2,Ands the values contained within R1 and R2 and outputs their result to outR.,No
 Logic,OR,0x22,OR outR R1 R2,Ors the values contained within R1 and R2 and outputs their result to outR.,No
@@ -27,7 +30,7 @@ Logic,NOR,0x23,NOR outR R1 R2,Nors the values contained within R1 and R2 and out
 Logic,NAND,0x24,NAND outR R1 R2,Nands the values contained within R1 and R2 and outputs their result to outR.,No
 Logic,XOR,0x25,XOR outR R1 R2,Xors the values contained within R1 and R2 and outputs their result to outR.,No
 Logic,LSHF,0x26,LSHF outR R1 R2,Left shifts the value in R1 by value contained within R2 and outputs in outR.,No
-Logic,RSHF,0x27,RSHF outR R1 R2,Left shifts the value in R1 by value contained within R2 and outputs in outR.,No
 Flow,JMP,0x30,JMP label1 pad pad,Change the instruction pointer to the first instruction after a given label address.,Yes
 Flow,JMPZ,0x31,JMPZ label register pad,Change the instruction pointer to the first instruction after a given label address IF the value in R1 equals 0.,Yes
 Flow,JMPE,0x32,JMPE label R1 R2,Change the instruction pointer to the first instruction after a given label address if the two register values are equal.,No
+Flow,JMPi,0x33,JMPi R0 pad pad,Sets the instruction pointer to the value stored in R0 (indirect jump).,No

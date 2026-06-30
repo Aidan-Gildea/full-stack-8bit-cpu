@@ -40,7 +40,6 @@ namespace ISALib
             ["NAND"] = new([OPCODE, REGISTER, REGISTER, REGISTER], new("NAND", 0x24), NAND),
             ["XOR"] = new([OPCODE, REGISTER, REGISTER, REGISTER], new("XOR", 0x25), XOR),
             ["LSHF"] = new([OPCODE, REGISTER, REGISTER, REGISTER], new("LSHF", 0x26), LSHF),
-            ["RSHF"] = new([OPCODE, REGISTER, REGISTER, REGISTER], new("RSHF", 0x27), RSHF),
             ["JMP"] = new([OPCODE, LABEL, PAD, PAD], new("JMP", 0x30), JMP),
             ["JMPZ"] = new([OPCODE, LABEL, REGISTER, PAD], new("JMPZ", 0x31), JMPZ),
         };
