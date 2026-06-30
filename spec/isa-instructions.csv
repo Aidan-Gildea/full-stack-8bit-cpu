@@ -7,22 +7,22 @@ Math,DIV,0x13,DIV outR R1 R2,Divides the value contained within Register 1 from 
 Math,EQ,0x14,EQ outR R1 R2,Checks if the value of R1 and R2 are equal and outputs the value as 0 or 1 to the out Register.,Yes
 Math,GTHAN,0x15,GTHAN outR R1 R2,"Checks if the value of R1 is greater than the value of R2 and outputs true/false (1, 0) to the outR.",Yes
 Math,LTHAN,0x16,LTHAN outR R1 R2,"Checks if the value of R1 is less than than the value of R2 and outputs true/false (1, 0) to the outR.",Yes
-Math,SETBIT,0x17,SETBIT outR val,Sets the val'th bit (starting at least significant bit) to 1 in the out register.,No
-Math,CLRBIT,0x18,CLRBIT outR val,Sets the val'th bit (starting at least significant bit) to 0 in the out register.,No
+Math,SETBIT,0x17,SETBIT outR val pad,Sets the val'th bit (starting at least significant bit) to 1 in the out register.,No
+Math,CLRBIT,0x18,CLRBIT outR val pad,Sets the val'th bit (starting at least significant bit) to 0 in the out register.,No
 Memory,SET,0x40,SET R1 val pad,"Sets the value contained within a given  Register, R1 to the value provided.",Yes
 Memory,MOV,0x41,Mov outR R1 pad,"Moves the value contained within a given Register, 2R, and copies/moves it to the given register, outR",No
-Memory,PRNT,0x42,PRNT,"Checks if the print bit(first bit) of flag register is set to 1, sets it to 0, and writes the char register to console.",No
+Memory,PRNT,0x42,PRNT pad pad pad,"Checks if the print bit(first bit) of flag register is set to 1, sets it to 0, and writes the char register to console.",No
 Memory,READ,0x43,READ valR pad pad,"If a key is pressed, it sets the value within the flag register to 1 and the val register to the current key.",No
-Memory,RNDM,0x44,RNDM MinV MaxV,"If the rndm flag is 1, set to 0, set rndm register to val inbetween minv and maxv",No
+Memory,RNDM,0x44,RNDM MinV MaxV pad,"If the rndm flag is 1, set to 0, set rndm register to val inbetween minv and maxv",No
 Memory,PUSH,0x45,PUSH R1 pad pad,"Pushes the value contained within R1 onto the stack: writes R1 to the memory address held in the Stack Pointer, then moves the Stack Pointer down by 1.",No
 Memory,POP,0x46,POP R1 pad pad,"Pops the top value off the stack into R1: moves the Stack Pointer up by 1, then reads the value at the Stack Pointer address into R1.",No
-Memory,LOAD,0x47,LOAD RamAddr R0,Loads into R0 the value stored in RAM at address RamAddr.,No
-Memory,STORE,0x48,STORE RamAddr R0,Stores the value in R0 into RAM at address RamAddr.,No
-Memory,INC,0x49,INC R1,"Increment the value contained within the given register, R1 by 1.",No
-Memory,DEC,0x4A,DEC R1,"Decrement the value contained within the given register, R1, by 1.",No
-Memory,LOADi,0x4B,LOADi R1 R0,Loads into R0 the value stored in RAM at the address held in R1 (indirect load).,No
-Memory,STOREi,0x4C,STOREi R1 R0,Stores the value in R0 into RAM at the address held in R1 (indirect store).,No
-Memory,SETi,0x4D,SETi R1 R0,Sets R1 to the value contained in R0 (register-to-register copy).,No
+Memory,LOAD,0x47,LOAD RamAddr R0 pad,Loads into R0 the value stored in RAM at address RamAddr.,No
+Memory,STORE,0x48,STORE RamAddr R0 pad,Stores the value in R0 into RAM at address RamAddr.,No
+Memory,INC,0x49,INC R1 pad pad,"Increment the value contained within the given register, R1 by 1.",No
+Memory,DEC,0x4A,DEC R1 pad pad,"Decrement the value contained within the given register, R1, by 1.",No
+Memory,LOADi,0x4B,LOADi R1 R0 pad,Loads into R0 the value stored in RAM at the address held in R1 (indirect load).,No
+Memory,STOREi,0x4C,STOREi R1 R0 pad,Stores the value in R0 into RAM at the address held in R1 (indirect store).,No
+Memory,SETi,0x4D,SETi R1 R0 pad,Sets R1 to the value contained in R0 (register-to-register copy).,No
 Logic,NOT,0x20,NOT outR R1 pad,Nots the value within R1 and outputs the value in outR,No
 Logic,AND,0x21,AND outR R1 R2,Ands the values contained within R1 and R2 and outputs their result to outR.,No
 Logic,OR,0x22,OR outR R1 R2,Ors the values contained within R1 and R2 and outputs their result to outR.,No
