@@ -10,16 +10,16 @@ Math,LTHAN,0x16,LTHAN outR R1 R2,"Checks if the value of R1 is less than than th
 Math,SETBIT,0x17,SETBIT outR val,Sets the val'th bit (starting at least significant bit) to 1 in the out register.,No
 Math,CLRBIT,0x18,CLRBIT outR val,Sets the val'th bit (starting at least significant bit) to 0 in the out register.,No
 Memory,SET,0x40,SET R1 val pad,"Sets the value contained within a given  Register, R1 to the value provided.",Yes
-Memory,MOV,0x41,Mov outR R1 pad,"Moves the value contained within a given Register, 2R, and copies/moves it to the given register, outR",No
-Memory,PRNT,0x42,PRNT,"Checks if the print bit(first bit) of flag register is set to 1, sets it to 0, and writes the char register to console.",No
-Memory,READ,0x43,READ valR pad pad,"If a key is pressed, it sets the value within the flag register to 1 and the val register to the current key.",No
-Memory,RNDM,0x44,RNDM MinV MaxV,"If the rndm flag is 1, set to 0, set rndm register to val inbetween minv and maxv",No
+Memory,MOV,0x41,Mov outR R1 pad,"Moves the value contained within a given Register, 2R, and copies/moves it to the given register, outR",Yes
+Memory,LOAD,0x42,LOAD outR Addr pad, "Gets the value stored at the memory address Addr and stores that value into the outR.",Yes
+Memory,STR,0x43,STR inR Addr pad,"Stores the value contained within the inR at the memory address Addr",Yes
+Memory,POP,0x44,POP R1 pad pad,"Pops the top value off the stack into R1: moves the Stack Pointer up by 1, then reads the value at the Stack Pointer address into R1.",No
 Memory,PUSH,0x45,PUSH R1 pad pad,"Pushes the value contained within R1 onto the stack: writes R1 to the memory address held in the Stack Pointer, then moves the Stack Pointer down by 1.",No
-Memory,POP,0x46,POP R1 pad pad,"Pops the top value off the stack into R1: moves the Stack Pointer up by 1, then reads the value at the Stack Pointer address into R1.",No
-Memory,LOAD,0x47,LOAD Mem1 Mem2 outR,"Gets the value stored at the memory address, where Mem1 is the 8 most significant bits and Mem2 is the 8 least significant bits, and stores that value into the outR.",No
-Memory,STR,0x48,STR Mem1 Mem2 inR,"Stores the value contained within the inR at the memory address, where Mem1 is the 8 most significant bits and Mem2 is the 8 least significant bits.",No
-Memory,INC,0x49,INC R1,"Increment the value contained within the given register, R1 by 1.",No
-Memory,DEC,0x4A,DEC R1,"Decrement the value contained within the given register, R1, by 1.",No
+Memory,PRNT,0x46,PRNT,"Checks if the print bit(first bit) of flag register is set to 1, sets it to 0, and writes the char register to console.",No
+Memory,READ,0x47,READ valR pad pad,"If a key is pressed, it sets the value within the flag register to 1 and the val register to the current key.",No
+Memory,INC,0x48,INC R1,"Increment the value contained within the given register, R1 by 1.",No
+Memory,DEC,0x49,DEC R1,"Decrement the value contained within the given register, R1, by 1.",No
+Memory,RNDM,0x4A,RNDM MinV MaxV,"If the rndm flag is 1, set to 0, set rndm register to val inbetween minv and maxv",No
 Logic,NOT,0x20,NOT outR R1 pad,Nots the value within R1 and outputs the value in outR,No
 Logic,AND,0x21,AND outR R1 R2,Ands the values contained within R1 and R2 and outputs their result to outR.,No
 Logic,OR,0x22,OR outR R1 R2,Ors the values contained within R1 and R2 and outputs their result to outR.,No
