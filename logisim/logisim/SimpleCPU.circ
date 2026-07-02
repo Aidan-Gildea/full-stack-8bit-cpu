@@ -176,8 +176,8 @@
     <wire from="(1170,1050)" to="(1190,1050)"/>
     <wire from="(1170,1070)" to="(1210,1070)"/>
     <wire from="(1170,1090)" to="(1230,1090)"/>
-    <wire from="(1170,1110)" to="(1270,1110)"/>
     <wire from="(1180,400)" to="(1180,550)"/>
+    <wire from="(1190,1050)" to="(1280,1050)"/>
     <wire from="(1190,980)" to="(1190,1050)"/>
     <wire from="(1200,380)" to="(1200,570)"/>
     <wire from="(1210,1000)" to="(1210,1070)"/>
@@ -188,10 +188,6 @@
     <wire from="(1240,160)" to="(1960,160)"/>
     <wire from="(1260,140)" to="(1260,630)"/>
     <wire from="(1260,140)" to="(1980,140)"/>
-    <wire from="(1270,1050)" to="(1270,1070)"/>
-    <wire from="(1270,1050)" to="(1280,1050)"/>
-    <wire from="(1270,1070)" to="(1270,1110)"/>
-    <wire from="(1270,1070)" to="(1280,1070)"/>
     <wire from="(1280,120)" to="(1280,650)"/>
     <wire from="(1280,120)" to="(2000,120)"/>
     <wire from="(1290,1080)" to="(1290,1210)"/>
@@ -990,13 +986,6 @@
       <a name="type" val="output"/>
       <a name="width" val="8"/>
     </comp>
-    <comp lib="0" loc="(910,480)" name="Pin">
-      <a name="appearance" val="NewPins"/>
-      <a name="facing" val="west"/>
-      <a name="label" val="Temp"/>
-      <a name="type" val="output"/>
-      <a name="width" val="8"/>
-    </comp>
     <comp lib="2" loc="(340,500)" name="Demultiplexer">
       <a name="select" val="4"/>
     </comp>
@@ -1224,7 +1213,6 @@
     <wire from="(700,510)" to="(730,510)"/>
     <wire from="(700,700)" to="(730,700)"/>
     <wire from="(710,240)" to="(710,310)"/>
-    <wire from="(710,240)" to="(880,240)"/>
     <wire from="(710,310)" to="(710,500)"/>
     <wire from="(710,310)" to="(730,310)"/>
     <wire from="(710,500)" to="(710,690)"/>
@@ -1261,8 +1249,6 @@
     <wire from="(800,630)" to="(800,660)"/>
     <wire from="(850,410)" to="(850,570)"/>
     <wire from="(850,410)" to="(910,410)"/>
-    <wire from="(880,240)" to="(880,480)"/>
-    <wire from="(880,480)" to="(910,480)"/>
     <wire from="(900,440)" to="(900,760)"/>
     <wire from="(900,440)" to="(910,440)"/>
   </circuit>
@@ -1575,10 +1561,10 @@
       <a name="select" val="3"/>
       <a name="selloc" val="tr"/>
     </comp>
-    <comp lib="9" loc="(580,764)" name="Text">
+    <comp lib="9" loc="(580,760)" name="Text">
       <a name="text" val="MEMORY"/>
     </comp>
-    <comp lib="9" loc="(624,1209)" name="Text">
+    <comp lib="9" loc="(620,1205)" name="Text">
       <a name="text" val="add mux here later"/>
     </comp>
     <comp lib="9" loc="(630,965)" name="Text">
