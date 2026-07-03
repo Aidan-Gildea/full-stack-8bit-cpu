@@ -32,7 +32,7 @@ Here it is running the `count_to_five` program (`logisim/example bytecode/count_
 
 ### Redesigning the CPU: v1 → v2
 
-I redid the CPU in Logisim for a more accurate representation of a real CPU: a centralized control unit handles all the signals within a single clock tick and does the manual routing, with far fewer unnecessary control buffers — which also made RAM easy to implement. The v2 layout is an extensible base for the stack and function-calling features listed in [What's next](#whats-next).
+I redid the CPU in Logisim for a more accurate representation of a real CPU: a centralized control unit handles all the signals within a single clock tick and does the manual routing, with far fewer unnecessary control buffers, which also made RAM easy to implement. The v2 layout is an extensible base for the stack and function-calling features listed in [What's next](#whats-next).
 
 | v1 | v2 (current) |
 |----|--------------|
@@ -42,7 +42,7 @@ I redid the CPU in Logisim for a more accurate representation of a real CPU: a c
 
 | Category | Instruction | Opcode | Notes |
 |----------|-------------|--------|-------|
-| — | `NONE` | `0x00` | No-op |
+| `NONE` | `NONE` | `0x00` | No-op |
 | Math | `ADD` | `0x10` | |
 | Math | `SUB` | `0x11` | |
 | Math | `MULT` | `0x12` | |
@@ -82,13 +82,13 @@ A full Rock Paper Scissors game written in SimpleISA assembly (`toolchain/Assemb
 
 In `toolchain/Assembler/TestData/`:
 
-- **CountToFive.asm** — counts to five with `ADD`/`JMPEQ`; the software twin of the program the Logisim CPU runs in the gif above.
+- **CountToFive.asm** - counts to five with `ADD`/`JMPEQ`; the software twin of the program the Logisim CPU runs in the gif above.
 - **Fibonacci.asm** — computes Fibonacci numbers with `ADD`, `MOV`, `GTHAN`, and `JMPZ`.
 - **MemorySwap.asm** — swaps two registers through RAM with `STR`/`LOAD`.
 - **PrintDigits.asm** — prints `12345` to the console using the `CHAR` register and `PRNT` (emulator only).
 - **RockPaperScissors.asm** — the full game.
 
-Hardware-ready Logisim RAM images of the examples that only use hardware instructions (`count_to_five`, `fibonacci`, `memory_swap`) live in `logisim/example bytecode/` — load one into the CPU's program RAM in Logisim to run it.
+Hardware-ready Logisim RAM images of the examples that only use hardware instructions (`count_to_five`, `fibonacci`, `memory_swap`) live in `logisim/example bytecode/`, so load one into the CPU's program RAM in Logisim to run it.
 
 ## What's next
 
