@@ -97,3 +97,4 @@ dotnet run --project toolchain/Emulator -- out.bin
 ```
 
 The Logisim CPU opens in [Logisim Evolution](https://github.com/logisim-evolution/logisim-evolution).
+
