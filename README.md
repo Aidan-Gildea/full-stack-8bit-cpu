@@ -65,6 +65,11 @@ And the full layout:
 
 The rest of the spec (`PRNT`, `READ`, `RNDM`, `INC`, `DEC`, `SETBIT`, `CLRBIT`, ...) is implemented in the software emulator only.
 
+### Lessons learned debugging the CPU
+
+- **Isolate the faulty instruction.** When the CPU crashed on a certain instruction, being able to run that instruction in isolation made it significantly easier to debug.
+- **Have registers write on the falling edge of the clock.** The CPU initially wrote registers on the rising edge, which caused a pretty severe problem: values raced through the datapath within a single tick. Writing on the falling edge gives the ALU and control signals the first half of the cycle to settle.
+
 ## Demo: Rock Paper Scissors
 
 A full Rock Paper Scissors game written in SimpleISA assembly (`toolchain/Assembler/TestData/RockPaperScissors.asm`). It reads user input with `READ`, branches with `JMPZ`, and prints results with `PRNT`.

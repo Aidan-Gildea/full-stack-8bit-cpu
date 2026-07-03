@@ -1,4 +1,0 @@
-*to later be notes in the README:
-For debugging the CPU I learned a few things
-- Always isolate the faulty instruction; since I ran into issues where my cpu crashed on a certain instruction, being able to isolate the instruction made it significantly easier to debug. 
-- Have registers write on the falling edge of clock tick - didnt have this in my cpu initially, causing a pretty severe and cooked problem. 
