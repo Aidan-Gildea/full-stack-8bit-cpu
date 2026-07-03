@@ -8,4 +8,5 @@ In order to execute the program, do the following:
 
 
 Program definitions: 
-count_to_five - a program which utilizes 
+count_to_five - a program which utilizes labels, JMP and manipulation of the IP to count to five iteratively. 
+

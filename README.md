@@ -30,9 +30,13 @@ Here it is running the `count_to_five` program (`logisim/example bytecode/count_
 
 ![The Logisim CPU counting to five](media/counttofivecpu.gif)
 
-And the full layout:
+### Redesigning the CPU: v1 → v2
 
-![SimpleISA CPU in Logisim](media/cpu-layout.png)
+I redid the CPU in Logisim for a more accurate representation of a real CPU: a centralized control unit handles all the signals within a single clock tick and does the manual routing, with far fewer unnecessary control buffers — which also made RAM easy to implement. The v2 layout is an extensible base for the stack and function-calling features listed in [What's next](#whats-next).
+
+| v1 | v2 (current) |
+|----|--------------|
+| ![CPU layout v1](media/cpu_layout_v1.png) | ![CPU layout v2](media/cpu_layout_v2.png) |
 
 ### Instructions implemented in hardware
 
@@ -86,6 +90,15 @@ In `toolchain/Assembler/TestData/`:
 
 Hardware-ready Logisim RAM images of the examples that only use hardware instructions (`count_to_five`, `fibonacci`, `memory_swap`) live in `logisim/example bytecode/` — load one into the CPU's program RAM in Logisim to run it.
 
+## What's next
+
+Building on the v2 layout:
+
+- `PUSH` and `POP` instructions.
+- A dedicated stack pointer (`SP`) register.
+- Stack frames and full function calling.
+- Indirect addressing for all instructions.
+
 ## Getting started
 
 Requires the .NET 8.0 SDK.
@@ -102,4 +115,3 @@ dotnet run --project toolchain/Emulator -- out.bin
 ```
 
 The Logisim CPU opens in [Logisim Evolution](https://github.com/logisim-evolution/logisim-evolution).
-
