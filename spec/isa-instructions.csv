@@ -1,16 +1,28 @@
 Category,Mnemonic,OpCode,Layout,Description,Implemented in Logisim
-None,NONE,0x00,NONE pad pad pad,Add 0 to a register?,Yes
+None,NONE,0x00,NONE pad pad pad,Does nothing for one instruction cycle.,Yes
 Math,ADD,0x10,ADD outR R1 R2,"Adds together the values contained in  Register 1 and Register 2, and put the result in the outR",Yes
 Math,SUB,0x11,SUB outR R1 R2,Subtracts the value contained within Register 1 from the value contained within Register 2 and places the result within the out Register.,Yes
 Math,MULT,0x12,MULT outR R1 R2,Multiplies the value contained within Register 1 from the value contained within Register 2 and places the result within the out Register.,Yes
 Math,DIV,0x13,DIV outR R1 R2,Divides the value contained within Register 1 from the value contained within Register 2 and places the result within the out Register.,Yes
-Math,EQ,0x14,EQ outR R1 R2,Checks if the value of R1 and R2 are equal and outputs the value as 0 or 1 to the out Register.,Yes
-Math,GTHAN,0x15,GTHAN outR R1 R2,"Checks if the value of R1 is greater than the value of R2 and outputs true/false (1, 0) to the outR.",Yes
-Math,LTHAN,0x16,LTHAN outR R1 R2,"Checks if the value of R1 is less than than the value of R2 and outputs true/false (1, 0) to the outR.",Yes
-Math,SETBIT,0x17,SETBIT outR val,Sets the val'th bit (starting at least significant bit) to 1 in the out register.,No
-Math,CLRBIT,0x18,CLRBIT outR val,Sets the val'th bit (starting at least significant bit) to 0 in the out register.,No
+Math,LSHF,0x14,LSHF outR R1 pad,Left shifts the value in R1 by a single bit and outputs in outR.,Yes
+Math,RSHF,0x15,RSHF outR R1 pad,Right shifts the value in R1 by a single bit and outputs in outR.,Yes
+Math,GTHAN,0x16,GTHAN outR R1 R2,"Checks if the value of R1 is greater than the value of R2 and outputs true/false (1, 0) to the outR.",Yes
+Math,EQ,0x17,EQ outR R1 R2,Checks if the value of R1 and R2 are equal and outputs the value as 0 or 1 to the out Register.,Yes
+Math,LTHAN,0x18,LTHAN outR R1 R2,"Checks if the value of R1 is less than than the value of R2 and outputs true/false (1, 0) to the outR.",Yes
+Math,SETBIT,0x19,SETBIT outR val,Sets the val'th bit (starting at least significant bit) to 1 in the out register.,No
+Math,CLRBIT,0x1A,CLRBIT outR val,Sets the val'th bit (starting at least significant bit) to 0 in the out register.,No
+Logic,NOT,0x20,NOT outR R1 pad,Nots the value within R1 and outputs the value in outR,Yes
+Logic,AND,0x21,AND outR R1 R2,Ands the values contained within R1 and R2 and outputs their result to outR.,Yes
+Logic,OR,0x22,OR outR R1 R2,Ors the values contained within R1 and R2 and outputs their result to outR.,Yes
+Logic,NOR,0x23,NOR outR R1 R2,Nors the values contained within R1 and R2 and outputs their result to outR.,Yes
+Logic,NAND,0x24,NAND outR R1 R2,Nands the values contained within R1 and R2 and outputs their result to outR.,Yes
+Logic,XOR,0x25,XOR outR R1 R2,Xors the values contained within R1 and R2 and outputs their result to outR.,Yes
+Logic,RSHFVAR,0x26,RSHFVAR outR R1 R2,Right shifts the value in R1 by the value contained within R2 (more than a single bit) and outputs in outR.,Yes
+Flow,JMP,0x30,JMP label1 pad pad,Change the instruction pointer to the first instruction after a given label address.,Yes
+Flow,JMPZ,0x31,JMPZ label register pad,Change the instruction pointer to the first instruction after a given label address IF the value in R1 equals 0.,Yes
+Flow,JMPEQ,0x32,JMPEQ label R1 R2,Change the instruction pointer to the first instruction after a given label address if the two register values are equal.,Yes
 Memory,SET,0x40,SET R1 val pad,"Sets the value contained within a given  Register, R1 to the value provided.",Yes
-Memory,MOV,0x41,Mov outR R1 pad,"Moves the value contained within a given Register, 2R, and copies/moves it to the given register, outR",Yes
+Memory,MOV,0x41,MOV outR R1 pad,"Moves the value contained within a given Register, 2R, and copies/moves it to the given register, outR",Yes
 Memory,LOAD,0x42,LOAD outR Addr pad, "Gets the value stored at the memory address Addr and stores that value into the outR.",Yes
 Memory,STR,0x43,STR inR Addr pad,"Stores the value contained within the inR at the memory address Addr",Yes
 Memory,POP,0x44,POP R1 pad pad,"Pops the top value off the stack into R1: moves the Stack Pointer up by 1, then reads the value at the Stack Pointer address into R1.",No
@@ -20,14 +32,3 @@ Memory,READ,0x47,READ valR pad pad,"If a key is pressed, it sets the value withi
 Memory,INC,0x48,INC R1,"Increment the value contained within the given register, R1 by 1.",No
 Memory,DEC,0x49,DEC R1,"Decrement the value contained within the given register, R1, by 1.",No
 Memory,RNDM,0x4A,RNDM MinV MaxV,"If the rndm flag is 1, set to 0, set rndm register to val inbetween minv and maxv",No
-Logic,NOT,0x20,NOT outR R1 pad,Nots the value within R1 and outputs the value in outR,No
-Logic,AND,0x21,AND outR R1 R2,Ands the values contained within R1 and R2 and outputs their result to outR.,No
-Logic,OR,0x22,OR outR R1 R2,Ors the values contained within R1 and R2 and outputs their result to outR.,No
-Logic,NOR,0x23,NOR outR R1 R2,Nors the values contained within R1 and R2 and outputs their result to outR.,No
-Logic,NAND,0x24,NAND outR R1 R2,Nands the values contained within R1 and R2 and outputs their result to outR.,No
-Logic,XOR,0x25,XOR outR R1 R2,Xors the values contained within R1 and R2 and outputs their result to outR.,No
-Logic,LSHF,0x26,LSHF outR R1 R2,Left shifts the value in R1 by value contained within R2 and outputs in outR.,No
-Logic,RSHF,0x27,RSHF outR R1 R2,Left shifts the value in R1 by value contained within R2 and outputs in outR.,No
-Flow,JMP,0x30,JMP label1 pad pad,Change the instruction pointer to the first instruction after a given label address.,Yes
-Flow,JMPZ,0x31,JMPZ label register pad,Change the instruction pointer to the first instruction after a given label address IF the value in R1 equals 0.,Yes
-Flow,JMPE,0x32,JMPE label R1 R2,Change the instruction pointer to the first instruction after a given label address if the two register values are equal.,No

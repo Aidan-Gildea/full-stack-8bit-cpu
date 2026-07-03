@@ -101,14 +101,16 @@ namespace ISALib
             }
         }
 
-        public static void LOAD(ushort[] registers, byte Mem1, byte Mem2, byte outR, int EXTRA)
+        public static ushort[] Memory = new ushort[256]; //RAM, 256 addresses like the logisim CPU
+
+        public static void LOAD(ushort[] registers, byte outR, byte Addr, byte pad, int EXTRA)
         {
-            throw new NotImplementedException();
+            registers[outR] = Memory[Addr];
         }
 
-        public static void STR(ushort[] registers, byte Mem1, byte Mem2, byte inR, int EXTRA)
+        public static void STR(ushort[] registers, byte inR, byte Addr, byte pad, int EXTRA)
         {
-            throw new NotImplementedException();
+            Memory[Addr] = registers[inR];
         }
 
         public static void INC(ushort[] registers, byte R1, byte pad1, byte pad2, int EXTRA)
@@ -151,12 +153,17 @@ namespace ISALib
             registers[outR] = (ushort)(registers[R1] ^ registers[R2]);
         }
 
-        public static void LSHF(ushort[] registers, byte outR, byte R1, byte R2, int EXTRA)
+        public static void LSHF(ushort[] registers, byte outR, byte R1, byte pad, int EXTRA) //shifts by a single bit, like the ALU does
         {
-            registers[outR] = (ushort)(registers[R1] << registers[R2]);
+            registers[outR] = (ushort)(registers[R1] << 1);
         }
 
-        public static void RSHF(ushort[] registers, byte outR, byte R1, byte R2, int EXTRA)
+        public static void RSHF(ushort[] registers, byte outR, byte R1, byte pad, int EXTRA) //shifts by a single bit, like the ALU does
+        {
+            registers[outR] = (ushort)(registers[R1] >> 1);
+        }
+
+        public static void RSHFVAR(ushort[] registers, byte outR, byte R1, byte R2, int EXTRA) //shifts by the value in R2, more than a single bit
         {
             registers[outR] = (ushort)(registers[R1] >> registers[R2]);
         }
@@ -173,7 +180,16 @@ namespace ISALib
 
         public static void JMPZ(ushort[] registers, byte label, byte R1, byte pad, int EXTRA)
         {
-            if (registers[R1] != 0) 
+            if (registers[R1] != 0)
+            {
+                return;
+            }
+            registers[reg["IP"]] = label;
+        }
+
+        public static void JMPEQ(ushort[] registers, byte label, byte R1, byte R2, int EXTRA)
+        {
+            if (registers[R1] != registers[R2])
             {
                 return;
             }
