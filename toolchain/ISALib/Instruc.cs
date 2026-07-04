@@ -58,7 +58,11 @@ namespace ISALib
                         break;
 
                     case Thing.LABEL:
-                        bytes[i] = labels[perameters[i]];
+                        // Named labels take precedence; bare numbers (e.g. from disassembled
+                        // output, which has no label names) are used as the address directly.
+                        bytes[i] = labels.TryGetValue(perameters[i], out byte labelAddress)
+                            ? labelAddress
+                            : byte.Parse(perameters[i]);
                         break;
                 }
             }

@@ -4,7 +4,7 @@ using static ISALib.OpCodes;
 
 namespace ISA.Disassembler
 {
-    internal class Disassembler
+    public class Disassembler
     {
 
         // Defaults are relative to the executable's directory (TestData is copied next to the build output).
@@ -25,7 +25,7 @@ namespace ISA.Disassembler
             Console.WriteLine($"Disassembled '{binaryFileName}' -> '{disassemblyFileName}'.");
         }
 
-        static string Disassemble(string[] args, string FileName)
+        public static string Disassemble(string[] args, string FileName)
         {
             byte[] machineCode = File.ReadAllBytes(FileName);
 
@@ -44,7 +44,7 @@ namespace ISA.Disassembler
                 {
                     bytes[j] = machineCode[i + j];
                 }
-                disassembly.Append(Codes[key].Disassemble(bytes)); //shorten the passed byte array to the current 4 bytes / total instruction, and then fill out instruction command. 
+                disassembly.AppendLine(Codes[key].Disassemble(bytes)); //one instruction per line, so the output can be fed straight back into the assembler.
 
             }
             return disassembly.ToString();

@@ -1,5 +1,7 @@
 # Full-Stack 8-Bit CPU
 
+[![CI](https://github.com/Aidan-Gildea/full-stack-8bit-cpu/actions/workflows/ci.yml/badge.svg)](https://github.com/Aidan-Gildea/full-stack-8bit-cpu/actions/workflows/ci.yml)
+
 An 8-bit CPU designed from the gates up: built in Logisim, with its arithmetic core rebuilt physically on a breadboard with real ICs. Around the CPU is the full stack needed to program it: a custom instruction set (SimpleISA), a two-pass assembler, a disassembler, and a software emulator that serves as the reference implementation for the hardware.
 
 **The pipeline: toolchain to simulation to silicon.** Write assembly, assemble it to bytecode, verify behavior in the emulator, then run the same bytecode on the gate-level CPU.
@@ -14,6 +16,7 @@ An 8-bit CPU designed from the gates up: built in Logisim, with its arithmetic c
 - **Logisim mini ALU** (`logisim/logisim_small/simplercpu.circ`): a heavily reduced version of the CPU's ALU, simple enough to build physically on a breadboard.
 - **Spec** (`spec/`): the full instruction and register definitions as CSV.
 - **Example programs** (`toolchain/Assembler/TestData/`): small assembly programs that exercise the ISA.
+- **Tests** (`toolchain/Tests`): xUnit suite run by GitHub Actions on every push: every example program is assembled and checked byte-for-byte against its committed binary, then disassembled and reassembled to prove `assemble(disassemble(bin)) == bin`, plus per-opcode encode/decode round trips and label-resolution checks.
 
 ## The ISA
 
@@ -125,6 +128,12 @@ Requires the .NET 8.0 SDK.
 
 ```bash
 dotnet build toolchain/ISA.sln
+```
+
+Run the test suite:
+
+```bash
+dotnet test toolchain/ISA.sln
 ```
 
 Assemble a program and run it in the emulator:

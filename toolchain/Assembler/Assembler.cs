@@ -6,7 +6,7 @@ using static ISALib.OpCodes;
 
 namespace ISA.Assembler
 {
-    internal class Assembler
+    public class Assembler
     {
         //done!
         const string COMMENT = "#"; // comment string. 
@@ -37,7 +37,7 @@ namespace ISA.Assembler
             return File.ReadAllLines(path);
         }
 
-        static byte[] Assemble(string File) 
+        public static byte[] Assemble(string File)
         {
             //first pass
             string[] file = ParseStringsFromFile(File);
