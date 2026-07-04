@@ -8,7 +8,8 @@ A custom instruction set with an assembler, disassembler, emulator, and a Logisi
 - **Assembler** (`toolchain/Assembler`): two-pass assembler with label support, turns assembly files (`.asm`) files into machine code.
 - **Disassembler** (`toolchain/Disassembler`): turns machine code back into readable assembly for debugging.
 - **Emulator** (`toolchain/Emulator`): runs the machine code in software. Written in C#, with registers, RAM, and basic I/O.
-- **Logisim CPU** (`logisim/logisim/SimpleCPU.circ`): a gate-level CPU that executes the assembled bytecode in hardware.
+- **Logisim CPU** (`logisim/logisim_full/SimpleCPU.circ`): a gate-level CPU that executes the assembled bytecode in hardware.
+- **Logisim mini ALU** (`logisim/logisim_small/simplercpu.circ`): a heavily reduced version of the CPU's ALU, simple enough to build physically on a breadboard.
 - **Spec** (`spec/`): the full instruction and register definitions as CSV.
 - **Example programs** (`toolchain/Assembler/TestData/`): small assembly programs that exercise the ISA.
 
@@ -68,6 +69,23 @@ I redid the CPU in Logisim for a more accurate representation of a real CPU: a c
 | Memory | `STR` | `0x43` | Store register into RAM |
 
 The rest of the spec (`PRNT`, `READ`, `RNDM`, `INC`, `DEC`, `SETBIT`, `CLRBIT`, ...) is implemented in the software emulator only.
+
+### From simulation to breadboard
+
+I also wrote a significantly reduced version of the CPU (`logisim/logisim_small/simplercpu.circ`): just the arithmetic core, which performs basic `ADD`/`SUB` operations by reading from ROM and running the values through a multiplexer, a full adder, and an XOR IC. Keeping it down to those few components meant it could be built physically with real ICs on a breadboard — here it is built out and running:
+
+| The physical build | Working |
+|--------------------|---------|
+| ![The mini ALU built on a breadboard](media/physical_buildout.png) | ![The physical build running](media/physical_build_working.gif) |
+
+Parts used (datasheets linked):
+
+- [AT28C256](https://ww1.microchip.com/downloads/en/DeviceDoc/doc0006.pdf) — 32K×8 parallel EEPROM, the ROM holding the program.
+- [SN74LS173A](https://www.ti.com/lit/ds/symlink/sn74ls173a.pdf) — 4-bit D-type register.
+- [SN74LS283](https://www.ti.com/lit/ds/symlink/sn74ls283.pdf) — 4-bit binary full adder with fast carry.
+- [SN74LS86A](https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/2380/SN54%2C74%28LS%2CS%2986%28A%29.pdf) — quad 2-input XOR gate.
+- [SN74LS157](https://www.ti.com/lit/ds/symlink/sn74ls157.pdf) — quad 2-to-1 multiplexer.
+- [SN74LS04](https://www.ti.com/lit/ds/symlink/sn74ls04.pdf) — hex inverter.
 
 ### Lessons learned debugging the CPU
 
