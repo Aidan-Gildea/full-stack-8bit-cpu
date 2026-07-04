@@ -1,6 +1,8 @@
-# SimpleISA
+# Full-Stack 8-Bit CPU
 
-A custom instruction set with an assembler, disassembler, emulator, and a Logisim CPU that runs it.
+An 8-bit CPU designed from the gates up: built in Logisim, with its arithmetic core rebuilt physically on a breadboard with real ICs. Around the CPU is the full stack needed to program it: a custom instruction set (SimpleISA), a two-pass assembler, a disassembler, and a software emulator that serves as the reference implementation for the hardware.
+
+**The pipeline: toolchain to simulation to silicon.** Write assembly, assemble it to bytecode, verify behavior in the emulator, then run the same bytecode on the gate-level CPU.
 
 ## What's here
 
